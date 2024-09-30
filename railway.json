@@ -1,0 +1,11 @@
+{
+    "services": {
+      "backend": {
+        "path": "server"
+      },
+      "frontend": {
+        "path": "client"
+      }
+    }
+  }
+  
