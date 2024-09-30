@@ -1,11 +1,23 @@
 {
-    "services": {
-      "backend": {
-        "path": "server"
+    "services": [
+      {
+        "name": "backend",
+        "path": "server",
+        "build": {
+          "builder": "Nixpacks",
+          "buildCommand": "npm install",
+          "startCommand": "npm start"
+        }
       },
-      "frontend": {
-        "path": "client"
+      {
+        "name": "frontend",
+        "path": "client",
+        "build": {
+          "builder": "Nixpacks",
+          "buildCommand": "npm install && npm run build",
+          "startCommand": "npx serve -s dist"
+        }
       }
-    }
+    ]
   }
   
