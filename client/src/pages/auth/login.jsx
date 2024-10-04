@@ -28,7 +28,6 @@ function AuthLogin() {
 
             console.log(data);
             
-            
             if(data?.payload?.success) {
                 toast({
                     title : data?.payload?.message,

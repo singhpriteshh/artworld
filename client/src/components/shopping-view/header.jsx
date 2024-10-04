@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { shoppingViewHeaderMenuItems } from "@/config";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "../ui/avatar";
-import { logoutUser } from "@/store/auth-slice";
+import { logoutUser, resetTokenAndCredentials } from "@/store/auth-slice";
 import UserCartWrapper from "./cart-wrapper";
 import { useEffect, useState } from "react";
 import { fetchCartItems } from "@/store/shop/cart-slice";
@@ -20,27 +20,27 @@ function MenuItems() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const [searchParams,setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  function handleNavigate(getCurrentMenuItem){
+  function handleNavigate(getCurrentMenuItem) {
     sessionStorage.removeItem("filters")
-      const currentFilter = getCurrentMenuItem.id !== "home" && getCurrentMenuItem.id !== "products" && getCurrentMenuItem.id !== "search"  ? 
+    const currentFilter = getCurrentMenuItem.id !== "home" && getCurrentMenuItem.id !== "products" && getCurrentMenuItem.id !== "search" ?
       {
-        category : [getCurrentMenuItem.id]
-      } : null 
+        category: [getCurrentMenuItem.id]
+      } : null
 
-      sessionStorage.setItem("filters", JSON.stringify(currentFilter))
+    sessionStorage.setItem("filters", JSON.stringify(currentFilter))
 
-      location.pathname.includes("listing") && currentFilter !== null ? 
+    location.pathname.includes("listing") && currentFilter !== null ?
       setSearchParams(new URLSearchParams(`?category=${getCurrentMenuItem.id}`)) :
       navigate(getCurrentMenuItem.path);
-    
+
   }
   return <nav className="flex flex-col font-bold mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row" >
     {
       shoppingViewHeaderMenuItems.map((menuItem) => (
         <Label
-          onClick={()=> handleNavigate(menuItem)}
+          onClick={() => handleNavigate(menuItem)}
           className="text-sm font-medium cursor-pointer"
           key={menuItem.id}
         >
@@ -59,7 +59,10 @@ function HeaderRightContent() {
   const [openCartSheet, setOpenCartSheet] = useState(false);
 
   function handleLogout() {
-    dispatch(logoutUser());
+    // dispatch(logoutUser());
+    dispatch(resetTokenAndCredentials());
+    sessionStorage.clear();
+    navigate("/auth/login");
   }
 
   useEffect(() => {
@@ -85,11 +88,11 @@ function HeaderRightContent() {
           <span className="sr-only">User Cart</span>
         </Button>
         <div>
-        <UserCartWrapper
-          setOpenCartSheet={setOpenCartSheet}
-          cartItems={cartItems && cartItems.items && cartItems.items.length > 0 ? cartItems.items : []} />
+          <UserCartWrapper
+            setOpenCartSheet={setOpenCartSheet}
+            cartItems={cartItems && cartItems.items && cartItems.items.length > 0 ? cartItems.items : []} />
         </div>
-        
+
       </Sheet>
 
 

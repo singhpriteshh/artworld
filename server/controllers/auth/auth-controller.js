@@ -7,7 +7,7 @@ const User = require("../../models/User");
 //register
 const registerUser = async (req, res) => {
     const { userName, email, password } = req.body;
-   
+
     try {
 
         const checkUser = await User.findOne({ email });
@@ -74,16 +74,28 @@ const loginUser = async (req, res) => {
             { expiresIn: '60m' }
         );
 
-        res.cookie("token", token, { httpOnly: true, secure: true }).json({
+        // res.cookie("token", token, { httpOnly: true, secure: true }).json({
+        //     success: true,
+        //     message: "Logged in Successfully",
+        //     user: {
+        //         email: checkUser.email,
+        //         role: checkUser.role,
+        //         id: checkUser._id,
+        //         userName: checkUser.userName,
+        //     },
+        // });
+
+        res.status(200).json({
             success: true,
-            message: "Logged in Successfully",
+            message: "Loged In successfull",
+            token,
             user: {
                 email: checkUser.email,
                 role: checkUser.role,
                 id: checkUser._id,
                 userName: checkUser.userName,
             },
-        });
+        })
 
 
     } catch (e) {
@@ -113,8 +125,28 @@ const logoutUser = (req, res) => {
 //auth middleware
 
 
+// const authMiddleware = async (req, res, next) => {
+//     const token = req.cookies.token;
+//     if (!token) return res.status(401).json({
+//         success: false,
+//         message: "Unauthorised use!"
+//     });
+
+//     try {
+//         const decoded = jwt.verify(token, "CLIENT_SECRET_KEY");
+//         req.user = decoded;
+//         next();
+//     } catch (error) {
+//         res.status(401).json({
+//             success: false,
+//             message: "Unauthorised use!"
+//         });
+//     }
+// };
+
 const authMiddleware = async (req, res, next) => {
-    const token = req.cookies.token;
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(' ')[1];
     if (!token) return res.status(401).json({
         success: false,
         message: "Unauthorised use!"
@@ -131,6 +163,5 @@ const authMiddleware = async (req, res, next) => {
         });
     }
 };
-
 
 module.exports = { registerUser, loginUser, logoutUser, authMiddleware };
