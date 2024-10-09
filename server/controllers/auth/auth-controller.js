@@ -87,7 +87,7 @@ const loginUser = async (req, res) => {
 
         res.status(200).json({
             success: true,
-            message: "Loged In successfull",
+            message: "Logged In successfull",
             token,
             user: {
                 email: checkUser.email,
@@ -95,7 +95,7 @@ const loginUser = async (req, res) => {
                 id: checkUser._id,
                 userName: checkUser.userName,
             },
-        })
+        });
 
 
     } catch (e) {

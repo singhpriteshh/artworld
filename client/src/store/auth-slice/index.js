@@ -7,7 +7,7 @@ const initialState = {
     isAuthenticated: false,
     isLoading: true,
     user: null,
-    token: null,
+    token : null
 };
 
 export const registerUser = createAsyncThunk(
@@ -115,17 +115,17 @@ const authSlice = createSlice({
             })
             .addCase(registerUser.fulfilled, (state, action) => {
                 console.log("Login Payload: ", action.payload); 
+
                 state.isLoading = false;
                 state.user = null;
                 state.isAuthenticated = false;
-                state.token = action.payload.token;
-                sessionStorage.setItem("token", JSON.stringify(action.payload.token));
+                
             })
             .addCase(registerUser.rejected, (state, action) => {
                 state.isLoading = false;
                 state.user = null;
                 state.isAuthenticated = false;
-                state.token = null;
+                
             })
             .addCase(loginUser.pending, (state) => {
                 state.isLoading = true;
@@ -136,6 +136,8 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.user = action.payload.success ? action.payload.user : null;
                 state.isAuthenticated = action.payload.success;
+                state.token = action.payload.token;
+                sessionStorage.setItem("token", JSON.stringify(action.payload.token));
             })
             .addCase(logoutUser.fulfilled, (state, action) => {
 
@@ -148,6 +150,7 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.user = null;
                 state.isAuthenticated = false;
+                state.token = null;
             })
             .addCase(checkAuth.pending, (state, action) => {
                 state.isLoading = true;
