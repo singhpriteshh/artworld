@@ -14,7 +14,7 @@ export const getAllOrdersForAdmin = createAsyncThunk(
     async () => {
 
         const response = await axios.get(
-            `${import.meta.env.VITE_API_URL}/admin/orders/get`
+            `${import.meta.env.VITE_API_URL}/api/admin/orders/get`
         );
         return response.data;
 

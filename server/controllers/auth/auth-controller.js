@@ -149,7 +149,7 @@ const authMiddleware = async (req, res, next) => {
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) return res.status(401).json({
         success: false,
-        message: "Unauthorised use!"
+        message: "Unauthorised user!"
     });
 
     try {
@@ -159,7 +159,7 @@ const authMiddleware = async (req, res, next) => {
     } catch (error) {
         res.status(401).json({
             success: false,
-            message: "Unauthorised use!"
+            message: "Unauthorised user!"
         });
     }
 };
