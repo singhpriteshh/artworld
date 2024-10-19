@@ -19,9 +19,10 @@ import UnauthPage from './pages/unauth-page';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { checkAuth } from './store/auth-slice';
-import { Skeleton } from "@/components/ui/skeleton"
+// import { Skeleton } from "@/components/ui/skeleton"
 import PaymentSuccessPage from './pages/shopping-view/payment-success';
 import SearchProducts from './pages/shopping-view/search';
+import Loader from './components/ui/loader';
 
 
 
@@ -39,10 +40,7 @@ function App() {
     dispatch(checkAuth(token));
   }, [dispatch]);
 
-  if (isLoading) return <Skeleton className="w-[600px] h-[600px] rounded-full" />;
-
-  // console.log(isLoading, user);
-
+  if (isLoading) return <Loader/>
 
 
   return (
@@ -90,12 +88,12 @@ function App() {
           <Route path='account' element={<ShoppingAccount />} />
           <Route path='search' element={<SearchProducts />} />
           <Route path='payment-success' element={<PaymentSuccessPage />} />
-          
+
         </Route>
 
         <Route path='/unauth-page' element={<UnauthPage />} />
 
-        <Route path="*" element={<NotFound />} /> 
+        <Route path="*" element={<NotFound />} />
 
       </Routes>
     </div>
