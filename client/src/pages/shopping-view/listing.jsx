@@ -119,6 +119,9 @@ function ShoppingListing() {
         });
       }
     });
+    if(!user?.id){
+      alert("login to continue");
+    }
 
   }
 

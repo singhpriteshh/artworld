@@ -105,6 +105,9 @@ function ShoppingHome() {
         });
       }
     });
+    if(!user?.id){
+      alert("login to continue");
+    }
 
   }
 
@@ -118,14 +121,14 @@ function ShoppingHome() {
       <div className="relative w-full h-[600px] overflow-hidden">
         {
           featureImageList && featureImageList.length > 0 ?
-          featureImageList.map((slide, index) => (
-            <img
-              src={slide?.image}
-              key={index}
-              className={`${index === currentSlide ? "opacity-100" : "opacity-0"} absolute top-0 left-0 w-full h-full object-cover trasition-opacity duration-1000`}
-            />
-          )) : null 
-          }
+            featureImageList.map((slide, index) => (
+              <img
+                key={index}
+                src={slide?.image}
+                className={`${index === currentSlide ? "opacity-100" : "opacity-0"} absolute top-0 left-0 w-full h-full object-cover trasition-opacity duration-1000`}
+              />
+            )) : null
+        }
         <Button
           variant="outline"
           size="icon"

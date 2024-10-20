@@ -64,6 +64,9 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                 });
             }
         });
+        if(!user?.id){
+            alert("login to continue");
+          }
 
     }
 
