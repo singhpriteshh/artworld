@@ -23,7 +23,7 @@ const addProductReview = async (req, res) => {
         if (!order) {
             return res.status(403).json({
                 success: false,
-                message: "Ypu need to purchase this review"
+                message: "You need to purchase this review"
             })
         }
 
