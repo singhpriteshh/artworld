@@ -92,7 +92,7 @@ function ShoppingCheckout() {
     try {
 
       const response = await dispatch(createNewOrder(orderData));
-      console.log(response, "hello");
+      // console.log(response, "hello");
 
 
       if (response && response.type === "order/createNewOrder/fulfilled") {
