@@ -133,12 +133,13 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
                     </div>
                     
                     <div className="flex items-center gap-2 mt-2">
-                        <div className="flex items-center gap-0.5">
+                        <div className="flex flex-wrap items-center gap-0.5">
                             <StartRatingComponent rating={averageReview} />
 
                         </div>
                         <span className="text-muted-foreground">({averageReview.toFixed(2)})</span>
                     </div>
+
                     <div className="flex items-center justify-between">
                         <p className={`${productDetails?.salePrice > 0 ? 'line-through' : ""} text-3xl font-bold text-primary`}>₹{productDetails?.price}</p>
                         {
