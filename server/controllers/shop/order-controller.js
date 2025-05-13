@@ -76,8 +76,6 @@ const capturePayment = async (req, res) => {
     
   
     let order = await Order.findById(orderId);
-    console.log(orderId, "orderID");
-    
 
     if(!order){
       return res.status(404).json({
@@ -92,11 +90,6 @@ const capturePayment = async (req, res) => {
       .createHmac('sha256', process.env.RAZORPAY_SECRET)
       .update(body.toString())
       .digest('hex');
-
-    // console.log(razorpay_signature, "recevied signature");
-    // console.log(expectedSignature, "expected signature");
-
-
 
     if (expectedSignature === razorpay_signature) {
       // Payment is valid, mark as paid in database

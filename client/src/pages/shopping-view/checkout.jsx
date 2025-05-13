@@ -21,9 +21,6 @@ function ShoppingCheckout() {
   const { razorpayOrderId = null, isLoading = false, paymentError = null } = useSelector((state) => state.order || {});
 
 
-
-  console.log(currentSelectedAddress, "currentSelectedAddress");
-
   const totalCartAmount =
     cartItems && cartItems.items && cartItems.items.length > 0
       ? cartItems.items.reduce(
@@ -54,10 +51,6 @@ function ShoppingCheckout() {
       });
       return;
     }
-
-
-    // console.log(orderId,"orderId");
-
 
     const orderData = {
       userId: user?.id,
@@ -92,17 +85,12 @@ function ShoppingCheckout() {
     try {
 
       const response = await dispatch(createNewOrder(orderData));
-      // console.log(response, "hello");
-
 
       if (response && response.type === "order/createNewOrder/fulfilled") {
         const razorpayOrder = response.payload;
 
         // Capture both razorpayOrderId and orderId from the response
         const { razorpayOrderId, orderId } = razorpayOrder;
-
-        console.log("Razorpay Order ID:", razorpayOrderId);
-        console.log("Your system Order ID:", orderId);
 
         const options = {
           key: import.meta.env.VITE_RAZORPAY_API_KEY, // Replace with your Razorpay key
@@ -122,8 +110,6 @@ function ShoppingCheckout() {
 
             // Dispatch capturePayment with payment data
             await dispatch(capturePayment(paymentData));
-            console.log(paymentData, "pritesh");
-
             // Redirect after successful payment
             window.location.href = "/shop/payment-success";
 

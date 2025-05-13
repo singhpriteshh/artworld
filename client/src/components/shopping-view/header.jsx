@@ -70,9 +70,6 @@ function HeaderRightContent() {
   }, [dispatch]);
 
 
-  // console.log(cartItems, "prtiesh");
-
-
   return (
     <div className="flex lg:items-center lg:flex-row flex-col gap-4">
 

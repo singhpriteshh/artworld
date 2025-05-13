@@ -52,8 +52,6 @@ function ShoppingHome() {
     if (productDetails !== null) setOpenDetailsDialog(true);
   }, [productDetails]);
 
-  // console.log(productList, "productList");
-
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
     const currentFilter = {
@@ -65,7 +63,6 @@ function ShoppingHome() {
   }
 
   function handleGetProductDetails(getCurrentProductId) {
-    console.log(getCurrentProductId);
     dispatch(fetchProductDetails(getCurrentProductId));
   }
 
@@ -90,7 +87,6 @@ function ShoppingHome() {
     }
 
 
-    console.log(getCurrentProductId);
     dispatch(
       addToCart({
         userId: user?.id,

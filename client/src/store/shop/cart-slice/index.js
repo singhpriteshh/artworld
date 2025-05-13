@@ -45,8 +45,6 @@ export const fetchCartItems = createAsyncThunk(
 export const deleteCartItem = createAsyncThunk(
     "cart/deleteCartItem",
     async ({ userId, productId }) => {
-
-        // console.log(userId, productId);
         const response = await axios.delete(
             `${import.meta.env.VITE_API_URL}/api/shop/cart/${userId}/${productId}`
         );
@@ -101,10 +99,6 @@ const shoppingCartSlice = createSlice({
                 state.isLoading = true;
             }).
             addCase(fetchCartItems.fulfilled, (state, action) => {
-
-                // console.log(action.payload);
-                
-
                 state.isLoading = false;
                 state.cartItems = action.payload.data;
             }).
@@ -129,10 +123,7 @@ const shoppingCartSlice = createSlice({
             addCase(deleteCartItem.pending, (state) => {
                 state.isLoading = true;
             }).
-            addCase(deleteCartItem.fulfilled, (state, action) => {
-
-                console.log(action.payload);
-                
+            addCase(deleteCartItem.fulfilled, (state, action) => {                
                 state.isLoading = false;
                 state.cartItems = action.payload.data;
             }).

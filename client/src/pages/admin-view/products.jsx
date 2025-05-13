@@ -40,8 +40,6 @@ function AdminProducts() {
       dispatch(editProduct({
         id: currentEditedId, formData
       })).then((data) => {
-        console.log(data, "edit");
-
         if(data?.payload?.success) {
           dispatch(fetchAllProduct());
           setFormData(initialFormData)
@@ -54,14 +52,13 @@ function AdminProducts() {
         ...formData,
         image: uploadedImageUrl
       })).then((data) => {
-        console.log(data);
         if (data?.payload?.success) {
           dispatch(fetchAllProduct())
           setOpenCreateProductsDialog(false)
           setImageFile(null);
           setFormData(initialFormData)
           toast({
-            title: "Product add succeddfully"
+            title: "Product add successfully"
           });
         }
       });
@@ -85,9 +82,6 @@ function AdminProducts() {
   useEffect(() => {
     dispatch(fetchAllProduct());
   }, [dispatch]);
-
-
-  console.log(productList, uploadedImageUrl, "productList");
 
 
 

@@ -64,7 +64,6 @@ function Address({setCurrentSelectedAddress, selectedId}) {
             userId: user?.id,
         })
         ).then((data) => {
-            console.log(data);
             if (data?.payload?.success) {
                 dispatch(fetchAllAddresses(user?.id))
                 setFormData(initialAddressFormData)
@@ -76,7 +75,6 @@ function Address({setCurrentSelectedAddress, selectedId}) {
     }
 
     function handleDeleteAddress(getCurrentAddress) {
-        console.log(getCurrentAddress);
         dispatch(deleteAddress({ userId: user?.id, addressId: getCurrentAddress._id })).then((data) => {
             if (data?.payload?.success) {
                 dispatch(fetchAllAddresses(user?.id));
@@ -112,9 +110,6 @@ function Address({setCurrentSelectedAddress, selectedId}) {
         dispatch(fetchAllAddresses(user?.id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [dispatch])
-
-    // console.log(addressList,"addressList");
-
 
 
     return (
