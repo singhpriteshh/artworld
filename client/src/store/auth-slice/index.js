@@ -114,8 +114,6 @@ const authSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(registerUser.fulfilled, (state, action) => {
-                console.log("Login Payload: ", action.payload); 
-
                 state.isLoading = false;
                 state.user = null;
                 state.isAuthenticated = false;
@@ -155,7 +153,7 @@ const authSlice = createSlice({
             .addCase(checkAuth.pending, (state, action) => {
                 state.isLoading = true;
             })
-            .addCase(checkAuth.fulfilled, (state, action) => {
+            .addCase(checkAuth.fulfilled, (state, action) => {                
                 state.isLoading = false;
                 state.user = action.payload.success ? action.payload.user
                     : null;

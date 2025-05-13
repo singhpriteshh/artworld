@@ -14,9 +14,6 @@ function AddressCard({
   selectedId,
 }) {
 
-  console.log(selectedId, addressInfo?._id );
-  
-
   return (
     <Card onClick={
       setCurrentSelectedAddress

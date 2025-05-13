@@ -25,14 +25,11 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
     const { reviews } = useSelector((state) => state.shopReview);
 
     function handleRatingChange(getRating) {
-
-        console.log(getRating);
         setRating(getRating);
     }
 
     function handleAddToCart(getCurrentProductId, getTotalStock) {
-        console.log(getCurrentProductId);
-
+    
         let getCartItems = cartItems.items || [];
 
         if (getCartItems.length) {
@@ -103,8 +100,6 @@ function ProductDetailsDialog({ open, setOpen, productDetails }) {
             dispatch(getReviews(productDetails?._id));
         }
     }, [productDetails])
-
-    console.log(reviews, "reviews");
 
     const averageReview = reviews && reviews.length > 0 ?
         reviews.reduce((sum, reviewItem) => sum + reviewItem.reviewValue, 0) / reviews.length : 0;

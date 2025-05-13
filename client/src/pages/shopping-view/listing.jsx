@@ -24,10 +24,6 @@ function createSearchParamsHelper(filterParams) {
       queryParams.push(`${key}=${encodeURIComponent(paramValue)}`);
     }
   }
-
-  console.log(queryParams, "queryParams");
-
-
   return queryParams.join("&");
 }
 
@@ -55,8 +51,6 @@ function ShoppingListing() {
 
 
   function handleFilters(getSectionId, getCurrentOption) {
-    // console.log(getSectionId, getCurrentOption);
-
     let cpyFilters = { ...filters };
     const indexOfCurrentSection = Object.keys(cpyFilters).indexOf(getSectionId);
 
@@ -71,9 +65,7 @@ function ShoppingListing() {
       if (indexOfCurrentOption === -1)
         cpyFilters[getSectionId].push(getCurrentOption);
       else cpyFilters[getSectionId].splice(indexOfCurrentOption, 1);
-
     }
-    // console.log(cpyFilters);
     setFilters(cpyFilters);
     sessionStorage.setItem("filters", JSON.stringify(cpyFilters));
   }
@@ -86,7 +78,6 @@ function ShoppingListing() {
 
 
   function handleAddToCart(getCurrentProductId, getTotalStock) {
-    console.log(cartItems, "pp");
 
     let getCartItems = cartItems.items || [];
 
@@ -153,7 +144,6 @@ function ShoppingListing() {
 
 
 
-  console.log(productList, "productList");
 
 
   return (

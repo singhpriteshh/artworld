@@ -43,10 +43,6 @@ function AuthRegister() {
 
     }
 
-    console.log(formData);
-
-
-
     return (
         <div className="mx-auto w-full max-w-md space-y-8">
             <div className="text-center">
